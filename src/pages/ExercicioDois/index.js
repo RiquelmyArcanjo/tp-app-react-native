@@ -5,6 +5,8 @@ import * as Location from 'expo-location';
 export default function App() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [localizacao, setLocalizacao] = useState(0);
+
 
   useEffect(() => {
     (async () => {
@@ -12,11 +14,12 @@ export default function App() {
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
       }
-
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      setLocation(location.coords);
+      setLocalizacao(location.coords);
+      console.log(location);
     })();
-  });
+  },[]);
 
   let text = 'Waiting..';
   if (errorMsg) {
@@ -27,7 +30,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{text}</Text>
+      <Text>Localização Altitude {localizacao.altitude}</Text>
+      <Text>Localização Longitude {localizacao.longitude}</Text>
     </View>
   );
 }

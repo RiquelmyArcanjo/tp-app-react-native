@@ -1,10 +1,10 @@
 import React, { useEffect,useState } from 'react';
-import { View, Text,FlatList } from 'react-native';
+import { View, Text,ScrollView } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { set } from 'react-native-reanimated';
 
 export default function ExercicioTres() {
-
+ const [contato, setContato] = useState(0);
   useEffect(() => {
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
@@ -14,16 +14,16 @@ export default function ExercicioTres() {
         });
 
         if (data.length > 0) {
-        // setContato(data);
+          setContato(data);
+
           const contact = data;
-          console.log(contact);
+          console.log(contato[1]);
         }
       }
     })();
 
 
   }, []);
-
   return (
     <View
       style={{
@@ -33,7 +33,12 @@ export default function ExercicioTres() {
         justifyContent: 'center',
       }}>
       <Text>Contacts Module Example</Text>
-      {/* <FlatList data={["item","item2"]} renderItem={({item,index}) => (<text> {item} </text>) }/>  */}
+      <ScrollView>{
+      contato.map(contato => (
+      <Text>{contato.name}</Text>
+      ))}
+        </ScrollView>
     </View>
   );
 }
+
