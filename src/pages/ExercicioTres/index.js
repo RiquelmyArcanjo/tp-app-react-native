@@ -4,7 +4,7 @@ import * as Contacts from 'expo-contacts';
 import { set } from 'react-native-reanimated';
 
 export default function ExercicioTres() {
- const [contato, setContato] = useState(0);
+ const [contato, setContato] = useState([]);
   useEffect(() => {
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
@@ -15,16 +15,13 @@ export default function ExercicioTres() {
 
         if (data.length > 0) {
           setContato(data);
-
-          const contact = data;
-          console.log(contato[1]);
         }
       }
     })();
 
 
   }, []);
-  return (
+  return contato.length == 0 ? (<Text> Carregando </Text>) : (
     <View
       style={{
         flex: 1,
@@ -34,8 +31,8 @@ export default function ExercicioTres() {
       }}>
       <Text>Contacts Module Example</Text>
       <ScrollView>{
-      contato.map(contato => (
-      <Text>{contato.name}</Text>
+      contato.map((contato, index) => (
+      <Text key={index}>{contato.name}</Text>
       ))}
         </ScrollView>
     </View>

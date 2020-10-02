@@ -17,8 +17,8 @@ export default function App() {
   return(
   <View style={styles.container}>
     <Text style={styles.sectionTitle}>Área do Triângulo</Text>
-    <TextInput placeholder="Entre com a base" keyboardType="decimal-pad" style={styles.input}  value={base} onChangeText={setBase}/>
-    <TextInput placeholder="Entre com a altura" keyboardType="decimal-pad" style={styles.input} value={altura} onChangeText={setAltura}/>
+    <TextInput placeholder="Entre com a base" keyboardType="decimal-pad" style={styles.input}  value={base.toString()} onChangeText={setBase}/>
+    <TextInput placeholder="Entre com a altura" keyboardType="decimal-pad" style={styles.input} value={altura.toString()} onChangeText={setAltura}/>
     <Text style={styles.sectionSubtitle}>Resultado</Text>
   <Text style={styles.result}>{area}</Text>
   </View>);
